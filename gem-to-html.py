@@ -15,7 +15,7 @@ for subdir, dirs, files in os.walk("html"):
    subdirectoryPath = os.path.relpath(subdir, directory) #get the path to your subdirectory
    print(subdirectoryPath)
    filePath = os.path.join(subdirectoryPath, filename) #get the path to your file
-   destination= open(filePath + ".html", "w")
+   destination= open(filePath.replace(".gmi",".html"), "w")
    source= open(filePath, "r")
    destination.write("<!DOCTYPE html>\n")
    destination.write("<html>\n")
@@ -27,18 +27,23 @@ for subdir, dirs, files in os.walk("html"):
    for line in source:
     if line.startswith('###'):
      destination.write("<h3>")
-     destination.write(line.rstrip())
+     destination.write(line[3:len(line)].strip())
      destination.write("</h3>\n")
     elif line.startswith('##'):
      destination.write("<h2>")
-     destination.write(line.rstrip())
+     destination.write(line[2:len(line)].strip())
      destination.write("</h2>\n")
     elif line.startswith('#'):
      destination.write("<h1>")
-     destination.write(line.rstrip())
+     destination.write(line[1:len(line)].strip())
      destination.write("</h1>\n")
+    else:
+     destination.write("<p>")
+     destination.write(line.strip())
+     destination.write("</p>\n")
 
    destination.write("</body>\n")
    destination.write("</html>\n")
    source.close()
    destination.close()
+   os.remove(filePath)

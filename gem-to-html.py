@@ -1,0 +1,44 @@
+import os
+import sys
+import shutil
+from pathlib import Path
+
+src_path = r"gemini"
+dst_path = r"html"
+shutil.copytree(src_path, dst_path)
+
+directory = os.path.dirname(os.path.realpath(sys.argv[0])) #get the directory of your script
+print(directory)
+for subdir, dirs, files in os.walk("html"):
+ for filename in files:
+  if filename.find('.gmi') > 0:
+   subdirectoryPath = os.path.relpath(subdir, directory) #get the path to your subdirectory
+   print(subdirectoryPath)
+   filePath = os.path.join(subdirectoryPath, filename) #get the path to your file
+   destination= open(filePath + ".html", "w")
+   source= open(filePath, "r")
+   destination.write("<!DOCTYPE html>\n")
+   destination.write("<html>\n")
+   destination.write("<head>\n")
+   destination.write("<title></title>\n")
+   destination.write("<link rel=\"stylesheet\" href=\"style.css\">\n")
+   destination.write("</head>\n")
+   destination.write("<body>\n")
+   for line in source:
+    if line.startswith('###'):
+     destination.write("<h3>")
+     destination.write(line.rstrip())
+     destination.write("</h3>\n")
+    elif line.startswith('##'):
+     destination.write("<h2>")
+     destination.write(line.rstrip())
+     destination.write("</h2>\n")
+    elif line.startswith('#'):
+     destination.write("<h1>")
+     destination.write(line.rstrip())
+     destination.write("</h1>\n")
+
+   destination.write("</body>\n")
+   destination.write("</html>\n")
+   source.close()
+   destination.close()

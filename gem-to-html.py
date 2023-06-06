@@ -38,12 +38,25 @@ for subdir, dirs, files in os.walk("html"):
      destination.write(line[1:len(line)].strip())
      destination.write("</h1>\n")
     elif line.startswith('=>'):
-     destination.write("<a href=\"")
-     if line.startswith('gemini://'):
+     if line[2:len(line)].strip().split(" ", 1)[0].endswith(('.apng', '.gif', '.ico', '.cur', '.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp', '.png', '.svg')):
+      destination.write("<img scr=\"")
       destination.write(line[2:len(line)].strip().split(" ", 1)[0])
+      if len(line[2:len(line)].strip().split(" ", 1))>1:
+       destination.write("\" alt=\"")
+       destination.write(line[2:len(line)].strip().split(" ", 1)[1])
+       destination.write("\">\n")
+       destination.write("<p>")
+       destination.write(line[2:len(line)].strip().split(" ", 1)[1])
+       destination.write("</p>\n")
+      else:
+       destination.write("\">\n")
      else:
-      destination.write(line[2:len(line)].strip().split(" ", 1)[0].replace(".gmi",".html"))
-     destination.write("\">")
+      destination.write("<a href=\"")
+      if line.startswith('gemini://'):
+       destination.write(line[2:len(line)].strip().split(" ", 1)[0])
+      else:
+       destination.write(line[2:len(line)].strip().split(" ", 1)[0].replace(".gmi",".html"))
+      destination.write("\">")
      if len(line[2:len(line)].strip().split(" ", 1))>1:
       destination.write(line[2:len(line)].strip().split(" ", 1)[1])
      else:

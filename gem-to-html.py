@@ -39,7 +39,10 @@ for subdir, dirs, files in os.walk("html"):
      destination.write("</h1>\n")
     elif line.startswith('=>'):
      destination.write("<a href=\"")
-     destination.write(line[2:len(line)].strip().split(" ", 1)[0].replace(".gmi",".html"))
+     if line.startswith('gemini://'):
+      destination.write(line[2:len(line)].strip().split(" ", 1)[0])
+     else:
+      destination.write(line[2:len(line)].strip().split(" ", 1)[0].replace(".gmi",".html"))
      destination.write("\">")
      if len(line[2:len(line)].strip().split(" ", 1))>1:
       destination.write(line[2:len(line)].strip().split(" ", 1)[1])

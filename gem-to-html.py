@@ -37,6 +37,15 @@ for subdir, dirs, files in os.walk("html"):
      destination.write("<h1>")
      destination.write(line[1:len(line)].strip())
      destination.write("</h1>\n")
+    elif line.startswith('=>'):
+     destination.write("<a href=\"")
+     destination.write(line[2:len(line)].strip().split(" ", 1)[0].replace(".gmi",".html"))
+     destination.write("\">")
+     if len(line[2:len(line)].strip().split(" ", 1))>1:
+      destination.write(line[2:len(line)].strip().split(" ", 1)[1])
+     else:
+      destination.write(line[2:len(line)].strip().split(" ", 1)[0])
+     destination.write("</a>\n")
     else:
      destination.write("<p>")
      destination.write(line.strip())

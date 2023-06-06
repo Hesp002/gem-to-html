@@ -21,7 +21,7 @@ for subdir, dirs, files in os.walk("html"):
    destination.write("<html>\n")
    destination.write("<head>\n")
    destination.write("<title></title>\n")
-   destination.write("<link rel=\"stylesheet\" href=\"style.css\">\n")
+   destination.write("<link rel=\"stylesheet\" href=\"/style.css\">\n")
    destination.write("</head>\n")
    destination.write("<body>\n")
    for line in source:
@@ -39,19 +39,19 @@ for subdir, dirs, files in os.walk("html"):
      destination.write("</h1>\n")
     elif line.startswith('=>'):
      if line[2:len(line)].strip().split(" ", 1)[0].endswith(('.apng', '.gif', '.ico', '.cur', '.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp', '.png', '.svg')):
-      destination.write("<img scr=\"")
+      destination.write("<div><img scr=\"")
       destination.write(line[2:len(line)].strip().split(" ", 1)[0])
       if len(line[2:len(line)].strip().split(" ", 1))>1:
        destination.write("\" alt=\"")
        destination.write(line[2:len(line)].strip().split(" ", 1)[1])
-       destination.write("\">\n")
+       destination.write("\"></div>\n")
        destination.write("<p>")
        destination.write(line[2:len(line)].strip().split(" ", 1)[1])
        destination.write("</p>\n")
       else:
-       destination.write("\">\n")
+       destination.write("\"></div>\n")
      else:
-      destination.write("<a href=\"")
+      destination.write("<div><a href=\"")
       if line.startswith('gemini://'):
        destination.write(line[2:len(line)].strip().split(" ", 1)[0])
       else:
@@ -61,7 +61,7 @@ for subdir, dirs, files in os.walk("html"):
        destination.write(line[2:len(line)].strip().split(" ", 1)[1])
       else:
        destination.write(line[2:len(line)].strip().split(" ", 1)[0])
-      destination.write("</a>\n")
+      destination.write("</a></div>\n")
     else:
      destination.write("<p>")
      destination.write(line.strip())

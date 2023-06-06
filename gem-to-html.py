@@ -30,11 +30,11 @@ for subdir, dirs, files in os.walk("html"):
      destination.write("<div><pre>")
      destination.write(line)
      monospaceText = True
-    elif monospaceText:
-     destination.write(line)
     elif line.startswith('```') and monospaceText:
      destination.write("</pre></div>")
      monospaceText = False
+    elif monospaceText:
+     destination.write(line)
     elif line.startswith('###'):
      destination.write("<h3>")
      destination.write(line[3:len(line)].strip())

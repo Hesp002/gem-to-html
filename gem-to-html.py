@@ -24,8 +24,18 @@ for subdir, dirs, files in os.walk("html"):
    destination.write("<link rel=\"stylesheet\" href=\"/style.css\">\n")
    destination.write("</head>\n")
    destination.write("<body>\n")
+   monospaceText = False
    for line in source:
-    if line.startswith('###'):
+    if line.startswith('```') and not monospaceText:
+     destination.write("<div><pre>")
+     destination.write(line)
+     monospaceText = True
+    elif monospaceText:
+     destination.write(line)
+    elif line.startswith('```') and monospaceText:
+     destination.write("</pre></div>")
+     monospaceText = False
+    elif line.startswith('###'):
      destination.write("<h3>")
      destination.write(line[3:len(line)].strip())
      destination.write("</h3>\n")

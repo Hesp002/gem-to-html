@@ -24,6 +24,7 @@ for subdir, dirs, files in os.walk("html"):
    destination.write("<link rel=\"stylesheet\" href=\"/style.css\">\n")
    destination.write("</head>\n")
    destination.write("<body>\n")
+   destination.write("<div class=\"main\">\n")
    monospaceText = False
    listText = False
    for line in source:
@@ -95,6 +96,7 @@ for subdir, dirs, files in os.walk("html"):
      destination.write(line.strip())
      destination.write("</p></div>\n")
 
+   destination.write("</div>\n")
    destination.write("</body>\n")
    destination.write("</html>\n")
    source.close()

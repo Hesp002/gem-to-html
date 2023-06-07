@@ -25,9 +25,6 @@ for subdir, dirs, files in os.walk("html"):
    destination.write("</head>\n")
    destination.write("<body>\n")
    destination.write("<div class=\"main\">\n")
-   destination.write("<div class=\"notice\"><span>")
-   destination.write("This webpage was automatically converted from my gemini capsule, there might be some issues. <a href=\"https://youtu.be/K-en4nEV5Xc\">What is Gemini?</a>")
-   destination.write("<span><div>\n")
    monospaceText = False
    listText = False
    for line in source:
@@ -99,6 +96,9 @@ for subdir, dirs, files in os.walk("html"):
      destination.write(line.strip())
      destination.write("</p></div>\n")
 
+   destination.write("<div class=\"notice\"><span>")
+   destination.write("This webpage was automatically converted from my gemini capsule, there might be some issues. <a href=\"https://youtu.be/K-en4nEV5Xc\">What is Gemini?</a>")
+   destination.write("<span><div>\n")
    destination.write("</div>\n")
    destination.write("</body>\n")
    destination.write("</html>\n")

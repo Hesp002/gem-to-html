@@ -24,6 +24,9 @@ for subdir, dirs, files in os.walk("html"):
    destination.write("<link rel=\"stylesheet\" href=\"/style.css\">\n")
    destination.write("</head>\n")
    destination.write("<body>\n")
+   destination.write("<div class=\"notice\"><span>")
+   destination.write("This webpage was automatically converted from my gemini capsule, there might be some issues. <a href=\"https://youtu.be/K-en4nEV5Xc\">What is Gemini?</a>")
+   destination.write("<span><div>\n")
    destination.write("<div class=\"main\">\n")
    monospaceText = False
    listText = False
@@ -77,7 +80,7 @@ for subdir, dirs, files in os.walk("html"):
        destination.write("\"></div>\n")
      else:
       destination.write("<div class=\"link\"><a href=\"")
-      if line.startswith('gemini://'):
+      if "://" in line:
        destination.write(line[2:len(line)].strip().split(" ", 1)[0])
       else:
        destination.write(line[2:len(line)].strip().split(" ", 1)[0].replace(".gmi",".html"))

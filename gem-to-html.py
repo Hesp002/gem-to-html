@@ -72,6 +72,10 @@ for subdir, dirs, files in os.walk("html"):
       else:
        destination.write(line[2:len(line)].strip().split(" ", 1)[0])
       destination.write("</a></div>\n")
+    elif line.startswith('>'):
+     destination.write("<span class=\"quote\"><p>")
+     destination.write(line.strip())
+     destination.write("</p></span>\n")
     else:
      destination.write("<p>")
      destination.write(line.strip())

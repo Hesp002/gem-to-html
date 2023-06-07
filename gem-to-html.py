@@ -27,8 +27,8 @@ for subdir, dirs, files in os.walk("html"):
    monospaceText = False
    for line in source:
     if line.startswith('```') and not monospaceText:
-     destination.write("<div><pre>")
-     destination.write(line)
+     destination.write("<div class=\"monospace\"><pre>")
+     destination.write(line[3:len(line)])
      monospaceText = True
     elif line.startswith('```') and monospaceText:
      destination.write("</pre></div>")
@@ -36,32 +36,32 @@ for subdir, dirs, files in os.walk("html"):
     elif monospaceText:
      destination.write(line)
     elif line.startswith('###'):
-     destination.write("<h3>")
+     destination.write("<div class=\"header3\"><h3>")
      destination.write(line[3:len(line)].strip())
-     destination.write("</h3>\n")
+     destination.write("</h3></div>\n")
     elif line.startswith('##'):
-     destination.write("<h2>")
+     destination.write("<div class=\"header2\"><h2>")
      destination.write(line[2:len(line)].strip())
-     destination.write("</h2>\n")
+     destination.write("</h2></div>\n")
     elif line.startswith('#'):
-     destination.write("<h1>")
+     destination.write("<div class=\"header1\"><h1>")
      destination.write(line[1:len(line)].strip())
-     destination.write("</h1>\n")
+     destination.write("</h1></div>\n")
     elif line.startswith('=>'):
      if line[2:len(line)].strip().split(" ", 1)[0].endswith(('.apng', '.gif', '.ico', '.cur', '.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp', '.png', '.svg')):
-      destination.write("<div><img scr=\"")
+      destination.write("<div class=\"image\"><img scr=\"")
       destination.write(line[2:len(line)].strip().split(" ", 1)[0])
       if len(line[2:len(line)].strip().split(" ", 1))>1:
        destination.write("\" alt=\"")
        destination.write(line[2:len(line)].strip().split(" ", 1)[1])
        destination.write("\"></div>\n")
-       destination.write("<p>")
+       destination.write("<div class=\"imagetext\"><p>")
        destination.write(line[2:len(line)].strip().split(" ", 1)[1])
-       destination.write("</p>\n")
+       destination.write("</p></div>\n")
       else:
        destination.write("\"></div>\n")
      else:
-      destination.write("<div><a href=\"")
+      destination.write("<div class=\"link\"><a href=\"")
       if line.startswith('gemini://'):
        destination.write(line[2:len(line)].strip().split(" ", 1)[0])
       else:
@@ -73,13 +73,13 @@ for subdir, dirs, files in os.walk("html"):
        destination.write(line[2:len(line)].strip().split(" ", 1)[0])
       destination.write("</a></div>\n")
     elif line.startswith('>'):
-     destination.write("<span class=\"quote\"><p>")
+     destination.write("<div class=\"quote\"><p>")
      destination.write(line.strip())
-     destination.write("</p></span>\n")
+     destination.write("</p></div>\n")
     else:
-     destination.write("<p>")
+     destination.write("<div class=\"text\"><p>")
      destination.write(line.strip())
-     destination.write("</p>\n")
+     destination.write("</p></div>\n")
 
    destination.write("</body>\n")
    destination.write("</html>\n")

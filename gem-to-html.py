@@ -25,7 +25,21 @@ for subdir, dirs, files in os.walk("html"):
    destination.write("</head>\n")
    destination.write("<body>\n")
    monospaceText = False
+   listText = False
    for line in source:
+    if line.startswith('*') and not listText:
+     destination.write("<div class=\"list\"><ul>\n")
+     destination.write("<li>")
+     destination.write(line[1:len(line)])
+     destination.write("</li>\n")
+     listText = True
+    elif line.startswith('*') and listText:
+     destination.write("<li>")
+     destination.write(line[1:len(line)])
+     destination.write("</li>\n")
+    elif listText:
+     destination.write("</ul></div>\n")
+     listText = False
     if line.startswith('```') and not monospaceText:
      destination.write("<div class=\"monospace\"><pre>")
      destination.write(line[3:len(line)])
@@ -76,7 +90,7 @@ for subdir, dirs, files in os.walk("html"):
      destination.write("<div class=\"quote\"><p>")
      destination.write(line.strip())
      destination.write("</p></div>\n")
-    else:
+    elif not listText:
      destination.write("<div class=\"text\"><p>")
      destination.write(line.strip())
      destination.write("</p></div>\n")

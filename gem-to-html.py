@@ -97,7 +97,7 @@ for subdir, dirs, files in os.walk("html"):
      destination.write("</p></div>\n")
 
    destination.write("<div class=\"notice\"><span>")
-   destination.write("This webpage was automatically converted from my gemini capsule, there might be some issues. <a href=\"https://youtu.be/K-en4nEV5Xc\">What is Gemini?</a>")
+   destination.write("This webpage was automatically converted from my gemini capsule, there might be some issues. <a href=\"https://gemini.circumlunar.space/docs/faq.gmi\">What is Gemini?</a> Learn more <a href=\"https://gemini.circumlunar.space/\">here</a>.")
    destination.write("<span><div>\n")
    destination.write("</div>\n")
    destination.write("</body>\n")

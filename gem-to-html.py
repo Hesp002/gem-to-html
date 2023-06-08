@@ -20,7 +20,7 @@ for subdir, dirs, files in os.walk("html"):
    destination.write("<!DOCTYPE html>\n")
    destination.write("<html>\n")
    destination.write("<head>\n")
-   destination.write("<title></title>\n")
+   destination.write("<title>HES.PE</title>\n")
    destination.write("<link rel=\"stylesheet\" href=\"/style.css\">\n")
    destination.write("</head>\n")
    destination.write("<body>\n")
@@ -42,8 +42,10 @@ for subdir, dirs, files in os.walk("html"):
      destination.write("</ul></div>\n")
      listText = False
     if line.startswith('```') and not monospaceText:
-     destination.write("<div class=\"monospace\"><pre>")
+     destination.write("<!-- ")
      destination.write(line[3:len(line)])
+     destination.write(" -->\n")
+     destination.write("<div class=\"monospace\"><pre>")
      monospaceText = True
     elif line.startswith('```') and monospaceText:
      destination.write("</pre></div>")

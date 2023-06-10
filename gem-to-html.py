@@ -43,7 +43,7 @@ for subdir, dirs, files in os.walk("html"):
      listText = False
     if line.startswith('```') and not monospaceText:
      destination.write("<!-- ")
-     destination.write(line[3:len(line)])
+     destination.write(line[3:len(line)].strip())
      destination.write(" -->\n")
      destination.write("<div class=\"monospace\"><pre>")
      monospaceText = True
@@ -66,7 +66,7 @@ for subdir, dirs, files in os.walk("html"):
      destination.write("</h1></div>\n")
     elif line.startswith('=>'):
      if line[2:len(line)].strip().split(" ", 1)[0].endswith(('.apng', '.gif', '.ico', '.cur', '.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp', '.png', '.svg')):
-      destination.write("<div class=\"image\"><img scr=\"")
+      destination.write("<div class=\"image\"><img src=\"")
       destination.write(line[2:len(line)].strip().split(" ", 1)[0])
       if len(line[2:len(line)].strip().split(" ", 1))>1:
        destination.write("\" alt=\"")

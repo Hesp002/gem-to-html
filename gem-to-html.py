@@ -21,6 +21,7 @@ for subdir, dirs, files in os.walk("html"):
    destination.write("<html>\n")
    destination.write("<head>\n")
    destination.write("<title>HES.PE</title>\n")
+   destination.write("<link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\">\n")
    destination.write("<link rel=\"stylesheet\" href=\"/style.css\">\n")
    destination.write("</head>\n")
    destination.write("<body>\n")
@@ -72,9 +73,9 @@ for subdir, dirs, files in os.walk("html"):
        destination.write("\" alt=\"")
        destination.write(line[2:len(line)].strip().split(" ", 1)[1])
        destination.write("\"></div>\n")
-       destination.write("<div class=\"imagetext\"><p>")
+       destination.write("<div class=\"imagetext\"><span>")
        destination.write(line[2:len(line)].strip().split(" ", 1)[1])
-       destination.write("</p></div>\n")
+       destination.write("</span></div>\n")
       else:
        destination.write("\"></div>\n")
      else:

@@ -94,7 +94,7 @@ for subdir, dirs, files in os.walk("html"):
      destination.write("<div class=\"quote\"><p>")
      destination.write(line.strip())
      destination.write("</p></div>\n")
-    elif not listText:
+    elif not listText and len(line.strip())>0:
      destination.write("<div class=\"text\"><p>")
      destination.write(line.strip())
      destination.write("</p></div>\n")

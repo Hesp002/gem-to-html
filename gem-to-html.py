@@ -79,10 +79,14 @@ for subdir, dirs, files in os.walk("html"):
       else:
        destination.write("\"></div>\n")
      else:
-      destination.write("<div class=\"link\"><a href=\"")
-      if "://" in line:
+      if "http://" in line or "https://" in line:
+       destination.write("<div class=\"link\"><a href=\"")
+       destination.write(line[2:len(line)].strip().split(" ", 1)[0])
+      elif "://" in line:
+       destination.write("<div class=\"outsidelink\"><a href=\"")
        destination.write(line[2:len(line)].strip().split(" ", 1)[0])
       else:
+       destination.write("<div class=\"link\"><a href=\"")
        destination.write(line[2:len(line)].strip().split(" ", 1)[0].replace(".gmi",".html"))
       destination.write("\">")
       if len(line[2:len(line)].strip().split(" ", 1))>1:

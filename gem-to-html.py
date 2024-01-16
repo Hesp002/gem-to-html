@@ -65,6 +65,14 @@ for subdir, dirs, files in os.walk("html"):
      destination.write("<div class=\"header1\"><h1>")
      destination.write(line[1:len(line)].strip())
      destination.write("</h1></div>\n")
+    elif line.startswith('- [ ] '):
+     destination.write("<div class=\"text\"><label class=\"checkbox\"><input type=\"checkbox\" disabled>")
+     destination.write(line[6:len(line)].strip())
+     destination.write("</label></div>\n")
+    elif line.startswith('- [\x ] '):
+     destination.write("<div class=\"text\"><label class=\"checkbox\"><input type=\"checkbox\" checked=\"checked\" disabled>")
+     destination.write(line[6:len(line)].strip())
+     destination.write("</label></div>\n")
     elif line.startswith('=>'):
      if line[2:len(line)].strip().split(" ", 1)[0].endswith(('.apng', '.gif', '.ico', '.cur', '.jpg', '.jpeg', '.jfif', '.pjpeg', '.pjp', '.png', '.svg')):
       destination.write("<div class=\"image\"><img src=\"")

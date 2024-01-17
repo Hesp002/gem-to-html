@@ -29,20 +29,23 @@ for subdir, dirs, files in os.walk("html"):
    monospaceText = False
    listText = False
    for line in source:
-    if line.startswith('*') and not listText:
+    checkbox = False
+    if line.startswith('* [ ] '):
+     destination.write("<div class=\"text\"><label class=\"checkbox\"><input type=\"checkbox\" disabled>")
+     destination.write(line[6:len(line)].strip())
+     destination.write("</label></div>\n")
+     checkbox = True
+    elif line.startswith('* [x] '):
+     destination.write("<div class=\"text\"><label class=\"checkbox\"><input type=\"checkbox\" checked=\"checked\" disabled>")
+     destination.write(line[6:len(line)].strip())
+     destination.write("</label></div>\n")
+     checkbox = True
+    elif line.startswith('*') and not listText:
      destination.write("<div class=\"list\"><ul>\n")
      destination.write("<li>")
      destination.write(line[1:len(line)])
      destination.write("</li>\n")
      listText = True
-    elif line.startswith('* [ ] '):
-     destination.write("<div class=\"text\"><label class=\"checkbox\"><input type=\"checkbox\" disabled>")
-     destination.write(line[6:len(line)].strip())
-     destination.write("</label></div>\n")
-    elif line.startswith('* [x] '):
-     destination.write("<div class=\"text\"><label class=\"checkbox\"><input type=\"checkbox\" checked=\"checked\" disabled>")
-     destination.write(line[6:len(line)].strip())
-     destination.write("</label></div>\n")
     elif line.startswith('*') and listText:
      destination.write("<li>")
      destination.write(line[1:len(line)])
@@ -106,7 +109,7 @@ for subdir, dirs, files in os.walk("html"):
      destination.write("<div class=\"quote\"><p>")
      destination.write(line.strip())
      destination.write("</p></div>\n")
-    elif not listText and len(line.strip())>0:
+    elif not listText and not checkbox and len(line.strip())>0:
      destination.write("<div class=\"text\"><p>")
      destination.write(line.strip())
      destination.write("</p></div>\n")

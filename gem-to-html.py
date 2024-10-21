@@ -13,7 +13,7 @@ for subdir, dirs, files in os.walk("html"):
  for filename in files:
   if filename.find('.gmi') > 0:
    subdirectoryPath = os.path.relpath(subdir, directory) #get the path to your subdirectory
-   print(subdirectoryPath)
+   #print(subdirectoryPath)
    filePath = os.path.join(subdirectoryPath, filename) #get the path to your file
    destination= open(filePath.replace(".gmi",".html"), "w")
    source= open(filePath, "r")
@@ -124,3 +124,5 @@ for subdir, dirs, files in os.walk("html"):
    source.close()
    destination.close()
    os.remove(filePath)
+
+print("Created html files for mirror")

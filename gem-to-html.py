@@ -20,6 +20,7 @@ for subdir, dirs, files in os.walk("html"):
    destination.write("<!DOCTYPE html>\n")
    destination.write("<html>\n")
    destination.write("<head>\n")
+   destination.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n")
    destination.write("<title>HES.PE</title>\n")
    destination.write("<link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\">\n")
    destination.write("<link rel=\"stylesheet\" href=\"/style.css\">\n")

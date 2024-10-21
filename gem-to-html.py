@@ -8,7 +8,7 @@ dst_path = r"html"
 shutil.copytree(src_path, dst_path)
 
 directory = os.path.dirname(os.path.realpath(sys.argv[0])) #get the directory of your script
-print(directory)
+#print(directory)
 for subdir, dirs, files in os.walk("html"):
  for filename in files:
   if filename.find('.gmi') > 0:
